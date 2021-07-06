@@ -30,3 +30,13 @@ holer.org
 # 在客户端连接
 ssh -p 65534 holer.org
 ```
+
+### 快速在主机间传输文件
+```shell
+tar -c /path/to/dir | ssh remote_server 'tar -xvf - -C /absolute/path/to/remotedir'
+```
+
+### 复制前100个文件夹
+``` shell
+ls |head -n 10 |xargs -i cp -r {} ../food100
+```
