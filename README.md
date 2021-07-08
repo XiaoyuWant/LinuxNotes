@@ -1,6 +1,6 @@
 
 
-### 如何通过ssh工具链连接内外网？[holer]
+### 如何通过ssh工具链连接内外网？[Holer]
 ```shell
 # 在服务器端的配置
 
@@ -30,6 +30,12 @@ holer.org
 # 在客户端连接
 ssh -p 65534 holer.org
 ```
+## [文件相关]
+
+### 远程复制文件
+```shell
+scp -r -P {port} root@host:~/path/of/folder
+```
 
 ### 快速在主机间传输文件
 ```shell
@@ -38,5 +44,5 @@ tar -c /path/to/dir | ssh remote_server 'tar -xvf - -C /absolute/path/to/remoted
 
 ### 复制前100个文件夹
 ``` shell
-ls |head -n 10 |xargs -i cp -r {} ../food100
+ls |head -n 100 |xargs -i cp -r {} ../food100
 ```
