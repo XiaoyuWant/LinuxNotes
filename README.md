@@ -1,4 +1,71 @@
 
+### HPC 基本用法
+
+1. 注册https://nic.csu.edu.cn/info/1144/1766.htm
+
+2. 使用ssh登录节点 `ssh -p 8220 name@hpclogin1.csu.edu.cn`
+
+3. HPC作业系统分为`登录节点`和`运算节点`，所有的文件和环境都可以被两者访问
+
+4. 在登录节点安装环境等，因为一旦进入GPU节点就无法联网
+
+5. 申请使用GPU：这些参数在HPC文档可以找到
+
+    `sbatch your_task.sh` 指申请任务以sh脚本形式
+
+   `-J 任务名` `-o -e 输出文件` `-N 节点` `-n 核心数` `-exclusive独占模式` `-p -q GPU节点类型` `--gres=gpu:2 GPU数目 `
+
+   后面的是你的任务，如`python your_task.py`
+
+```shell
+#!/bin/sh
+#SBATCH -J loop
+#SBATCH -o loop.log
+#SBATCH -e loop.err
+#SBATCH -N 1 -n 10 --exclusive -p gpu2Q -q gpuq --gres=gpu:2
+python your_task.py
+wait
+```
+
+6. 查看 `squeue`     取消`scancel NAME_ID`
+7. 申请到GPU之后，进入GPU节点`ssh gpu206` 任务会在后台运行，也可以在这个节点上同时进行其他计算
+
+
+
+### 配置环境？
+
+1. 安装 `anadonda3`
+
+2. 新建环境 `envname` 
+
+3. `conda install pytorch torvision cudatoolkit=10.0 -c pytorch` 10.0表示cuda的运行时版本
+
+4. 如果启动时没有conda环境
+
+   ```shell
+   export PATH=~/anaconda3/bin/:$PATH
+   conda init 
+   ```
+
+5. `conda install PKGNAME` 安装一些包
+
+6. 
+
+
+
+### 常用Linux指令
+
+| 命令       | 参数                  |                              |
+| ---------- | --------------------- | ---------------------------- |
+| `ls` `ll`  |                       | 列出文件名                   |
+| `cp `      | `-r`递归              | 复制文件、文件夹             |
+| `mkdir`    |                       | 新建文件夹                   |
+| `touch`    |                       | 新建文件                     |
+| `vim` `vi` |                       | 编辑器                       |
+| `scp`      | `-P`目标端口 `-r`递归 | 从本电脑复制文件到另一台电脑 |
+|            |                       |                              |
+
+
 
 ### 如何通过ssh工具链连接内外网？[Holer]
 ```shell
