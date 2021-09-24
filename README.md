@@ -125,22 +125,23 @@ ssh -p 65534 holer.org
 
 3. 用户
 
-   在任意设备连接公网服务器:端口即可连接
+   - 在任意设备连接公网服务器:端口即可连接
+   
 ---
 
 ## ⚪ 文件相关
 
-### 远程复制文件
+- 远程复制文件
 ```shell
 scp -r -P {port} root@host:~/path/of/folder
 ```
 
-### 快速在主机间传输文件
+- 快速在主机间传输文件
 ```shell
 tar -c /path/to/dir | ssh remote_server 'tar -xvf - -C /absolute/path/to/remotedir'
 ```
 
-### 复制前100个文件夹
+- 复制前100个文件夹
 ``` shell
 ls |head -n 100 |xargs -i cp -r {} ../food100
 ```
